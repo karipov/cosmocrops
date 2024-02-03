@@ -4,13 +4,17 @@ from datetime import datetime
 
 app = Flask(__name__)
 
+def round_to_two_decimals(number: float) -> float:
+    return round(number, 2)
+
 @app.route('/data')
 def get_data():
+
     data = {
-        'water_level': 0.5 + (datetime.now().second / 60.0 / 4),
-        'humidity': 0.6 - (datetime.now().second / 60.0 / 4),
-        'temperature': 25.5 + (datetime.now().second),
-        'co2': 0.7,
+        'water_level': round(0.5 + (datetime.now().second / 60.0 / 4), 2),
+        'humidity': round(0.6 - (datetime.now().second / 60.0 / 4), 2),
+        'temperature': round(25.5 + (datetime.now().second), 2),
+        'co2': 0.70,
         'light': 'on',
     }
 

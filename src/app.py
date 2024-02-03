@@ -1,4 +1,5 @@
 from flask import Flask, jsonify
+from arduino import get_data
 
 app = Flask(__name__)
 
@@ -11,6 +12,9 @@ def get_data():
         'co2': 0.7,
         'light': 'on',
     }
+
+    # fix when the arduino is connected
+    # real_data = get_data()
 
     response = jsonify(data)
     response.headers.add('Access-Control-Allow-Origin', '*')

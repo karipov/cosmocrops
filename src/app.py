@@ -10,17 +10,17 @@ def round_to_two_decimals(number: float) -> float:
 
 @app.route('/data')
 def get_data():
-    data = {
-        'water_level': round(0.5 + (datetime.now().second / 60.0 / 4), 2),
-        'moisture': round(0.6 - (datetime.now().second / 60.0 / 4), 2),
-        'temperature': round(25.5 + (datetime.now().second), 2),
-        'light': 23,
-        'timestamp': 1234567890,
-    }
+    # data = {
+    #     'water_level': round(0.5 + (datetime.now().second / 60.0 / 4), 2),
+    #     'moisture': round(0.6 - (datetime.now().second / 60.0 / 4), 2),
+    #     'temperature': round(25.5 + (datetime.now().second), 2),
+    #     'light': 23,
+    #     'timestamp': 1234567890,
+    # }
 
     # fix when the arduino is connected
-    # real_data = get_data()
-    # real_data['timestamp'] = int(datetime.now().timestamp())
+    data = get_data()
+    data['timestamp'] = int(datetime.now().timestamp())
 
     # fix cors
     response = jsonify(data)

@@ -30,10 +30,10 @@ def process_line(line: str) -> dict:
 
     # convert the strings to the correct data type
     data = {
-        'water_level': float(parts[0]),
-        'moisture': float(parts[1]),
-        'temperature': float(parts[2]),
-        'light': float(parts[3]),
+        'water_level': round(float(parts[0]), 2),
+        'moisture': round(float(parts[1]), 2),
+        'temperature': round(float(parts[2]), 2),
+        'light': round(float(parts[3]), 2),
     }
 
     return data
@@ -83,10 +83,17 @@ def get_data():
     for _ in range(NUM_TRIES):
         try:
             line = get_line()
-            # data = process_lines(lines)
             data = process_line(line)
             return data
         except Exception:
             continue
+
+    # default data
+    return {
+        'water_level': 0,
+        'moisture': 0,
+        'temperature': 0,
+        'light': 0,
+    }
 
 

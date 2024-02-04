@@ -13,6 +13,7 @@ def mean(numbers: list) -> float:
 def get_line():
     serial_device = serial.Serial(SERIAL_DEVICE, BAUD_RATE)
 
+    line = ''
     while serial_device.inWaiting() > 0:
         line = serial_device.readline().decode().strip()
     

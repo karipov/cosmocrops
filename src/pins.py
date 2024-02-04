@@ -14,7 +14,7 @@ GPIO.output(FILL, GPIO.LOW)
 GPIO.output(EMPTY, GPIO.LOW)
 
 # SECONDS TO SLEEP
-SLEEP = 5
+SLEEP = 10
 
 def output_fill():
     GPIO.setmode(GPIO.BCM)

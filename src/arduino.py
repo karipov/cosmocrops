@@ -1,6 +1,6 @@
 import serial
 
-SERIAL_DEVICE = '/dev/ttyUSB0'
+SERIAL_DEVICE = '/dev/ttyACM0'
 BAUD_RATE = 9600
 
 # helper functions

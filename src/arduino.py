@@ -76,7 +76,7 @@ def get_lines():
     return output
 
 
-def get_data():
+def get_data_from_arduino():
     """
     Get the data from the Arduino and process it
     """

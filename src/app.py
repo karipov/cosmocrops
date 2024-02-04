@@ -1,5 +1,5 @@
 from flask import Flask, jsonify
-from arduino import get_data
+from arduino import get_data_from_arduino
 from datetime import datetime
 from pins import output_fill, output_empty
 
@@ -9,7 +9,7 @@ def round_to_two_decimals(number: float) -> float:
     return round(number, 2)
 
 @app.route('/data')
-def get_data():
+def data():
     # data = {
     #     'water_level': round(0.5 + (datetime.now().second / 60.0 / 4), 2),
     #     'moisture': round(0.6 - (datetime.now().second / 60.0 / 4), 2),
@@ -19,11 +19,11 @@ def get_data():
     # }
 
     # fix when the arduino is connected
-    data = get_data()
-    data['timestamp'] = int(datetime.now().timestamp())
+    raw_data = get_data_from_arduino()
+    raw_data['timestamp'] = int(datetime.now().timestamp())
 
     # fix cors
-    response = jsonify(data)
+    response = jsonify(raw_data)
     response.headers.add('Access-Control-Allow-Origin', '*')
 
     return response

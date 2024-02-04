@@ -10,6 +10,16 @@ def mean(numbers: list) -> float:
     numbers = list(numbers)
     return sum(numbers) / len(numbers)
 
+def get_line():
+    serial_device = serial.Serial(SERIAL_DEVICE, BAUD_RATE)
+
+    while serial_device.inWaiting() > 0:
+        line = serial_device.readline().decode().strip()
+    
+    serial_device.close()
+
+    return line
+
 # data transofrmation functions
 def process_line(line: str) -> dict:
     """
@@ -77,8 +87,9 @@ def get_data():
     """
     for _ in range(NUM_TRIES):
         try:
-            lines = get_lines()
-            data = process_lines(lines)
+            line = get_line()
+            # data = process_lines(lines)
+            data = process_line(line)
             return data
         except Exception:
             continue

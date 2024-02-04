@@ -72,8 +72,12 @@ def get_data():
     """
     Get the data from the Arduino and process it
     """
-    lines = get_lines()
-    data = process_lines(lines)
-    return data
+    for _ in range(NUM_TRIES):
+        try:
+            lines = get_lines()
+            data = process_lines(lines)
+            return data
+        except ValueError:
+            continue
 
 

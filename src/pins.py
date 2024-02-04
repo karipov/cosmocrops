@@ -8,6 +8,9 @@ GPIO.setmode(GPIO.BCM)
 FILL = 2
 EMPTY = 3
 
+GPIO.output(FILL, GPIO.LOW)
+GPIO.output(EMPTY, GPIO.LOW)
+
 # SECONDS TO SLEEP
 SLEEP = 5
 

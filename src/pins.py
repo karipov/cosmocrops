@@ -17,6 +17,7 @@ GPIO.output(EMPTY, GPIO.LOW)
 SLEEP = 5
 
 def output_fill():
+    GPIO.setmode(GPIO.BCM)
     GPIO.setup(FILL, GPIO.OUT)
 
     GPIO.output(FILL, GPIO.HIGH)
@@ -25,7 +26,8 @@ def output_fill():
 
     GPIO.cleanup()
 
-def output_empty():
+def output_empty()
+    GPIO.setmode(GPIO.BCM)
     GPIO.setup(EMPTY, GPIO.OUT)
 
     GPIO.output(EMPTY, GPIO.HIGH)

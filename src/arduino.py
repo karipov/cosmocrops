@@ -23,10 +23,9 @@ def process_line(line: str) -> dict:
     # convert the strings to the correct data type
     data = {
         'water_level': float(parts[0]),
-        'humidity': float(parts[1]),
+        'moisture': float(parts[1]),
         'temperature': float(parts[2]),
-        'co2': float(parts[3]),
-        'light': parts[4],
+        'light': float(parts[3]),
     }
 
     return data
@@ -41,10 +40,9 @@ def process_lines(lines: list) -> dict:
     # average the data
     averaged = {
         'water_level': mean(d['water_level'] for d in dict_data),
-        'humidity': mean(d['humidity'] for d in dict_data),
+        'moisture': mean(d['moisture'] for d in dict_data),
         'temperature': mean(d['temperature'] for d in dict_data),
-        'co2': mean(d['co2'] for d in dict_data),
-        'light': mode(d['light'] for d in dict_data),
+        'light': mean(d['light'] for d in dict_data),
     }
 
     return averaged
@@ -57,7 +55,7 @@ def get_lines():
     ser = serial.Serial(SERIAL_DEVICE, BAUD_RATE)
     output = []
 
-    # read 10 lines of the serial output line
+    # read some lines of the serial output line
     for _ in range(10):
         output.append(ser.readline().decode().strip())
 

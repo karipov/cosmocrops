@@ -8,6 +8,8 @@ GPIO.setmode(GPIO.BCM)
 FILL = 2
 EMPTY = 3
 
+GPIO.setup(FILL, GPIO.OUT)
+GPIO.setup(EMPTY, GPIO.OUT)
 GPIO.output(FILL, GPIO.LOW)
 GPIO.output(EMPTY, GPIO.LOW)
 

@@ -58,7 +58,8 @@ def get_lines():
     for _ in range(NUM_TRIES):
         try:
             for _ in range(NUM_LINES):
-                output.reset_input_buffer()
+                ser.reset_input_buffer()
+                ser.reset_output_buffer()
                 output.append(ser.readline().decode().strip())
         except UnicodeDecodeError:
             continue

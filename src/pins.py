@@ -26,7 +26,7 @@ def output_fill():
 
     GPIO.cleanup()
 
-def output_empty()
+def output_empty():
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(EMPTY, GPIO.OUT)
 

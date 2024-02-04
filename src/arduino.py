@@ -6,6 +6,12 @@ NUM_TRIES = 3
 NUM_LINES = 1
 
 serial_device = serial.Serial(SERIAL_DEVICE, BAUD_RATE)
+last_saved_data = {
+    'water_level': 0,
+    'moisture': 0,
+    'temperature': 0,
+    'light': 0,
+}
 
 # helper functions
 def mean(numbers: list) -> float:
@@ -80,20 +86,17 @@ def get_data_from_arduino():
     """
     Get the data from the Arduino and process it
     """
+    global last_saved_data
     for _ in range(NUM_TRIES):
         try:
             line = get_line()
             data = process_line(line)
+            last_saved_data = data
             return data
         except Exception:
             continue
 
     # default data
-    return {
-        'water_level': 0,
-        'moisture': 0,
-        'temperature': 0,
-        'light': 0,
-    }
+    return last_saved_data
 
 

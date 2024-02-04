@@ -5,19 +5,17 @@ BAUD_RATE = 9600
 NUM_TRIES = 3
 NUM_LINES = 1
 
+serial_device = serial.Serial(SERIAL_DEVICE, BAUD_RATE)
+
 # helper functions
 def mean(numbers: list) -> float:
     numbers = list(numbers)
     return sum(numbers) / len(numbers)
 
 def get_line():
-    serial_device = serial.Serial(SERIAL_DEVICE, BAUD_RATE)
-
     line = ''
     while serial_device.inWaiting() > 0:
         line = serial_device.readline().decode().strip()
-    
-    serial_device.close()
 
     return line
 
@@ -62,22 +60,18 @@ def get_lines():
     Get the lines from the serial port (raw data)
     """
     # open the serial port
-    ser = serial.Serial(SERIAL_DEVICE, BAUD_RATE)
     output = []
 
     # read some lines of the serial output line
     for _ in range(NUM_TRIES):
         try:
             for _ in range(NUM_LINES):
-                ser.reset_input_buffer()
-                ser.reset_output_buffer()
-                output.append(ser.readline().decode().strip())
+                serial_device.reset_input_buffer()
+                serial_device.reset_output_buffer()
+                output.append(serial_device.readline().decode().strip())
         except UnicodeDecodeError:
             continue
         break
-
-    # close the serial port
-    ser.close()
 
     return output
 

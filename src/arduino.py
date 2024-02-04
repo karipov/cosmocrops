@@ -3,6 +3,7 @@ import serial
 SERIAL_DEVICE = '/dev/ttyACM0'
 BAUD_RATE = 9600
 NUM_TRIES = 3
+NUM_LINES = 5
 
 # helper functions
 def mean(numbers: list) -> float:
@@ -56,7 +57,7 @@ def get_lines():
     # read some lines of the serial output line
     for _ in range(NUM_TRIES):
         try:
-            for _ in range(5):
+            for _ in range(NUM_LINES):
                 output.append(ser.readline().decode().strip())
         except UnicodeDecodeError:
             continue
@@ -77,7 +78,7 @@ def get_data():
             lines = get_lines()
             data = process_lines(lines)
             return data
-        except ValueError:
+        except Exception:
             continue
 
 
